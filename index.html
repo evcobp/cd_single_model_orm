@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <h2>The Family</h2>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.created_at }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <h2>Add a Member</h2>
+        <form action="/create" method="post">
+        {% csrf_token %}
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" class="form-control">
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" class="form-control"><br>
+          <label for="email_address">Email</label>
+          <input type="text" id="email" name="email_address" class="form-control">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" class="form-control"><br>
+          <button type="submit">Submit</button>
+        </form>
+  </body>
+</html>
